@@ -38,8 +38,9 @@ def process_speech():
     global current_speech
     if current_speech.strip():
         print(f"\nProcessed speech: {current_speech.strip()}")
-        # Here you can do whatever you want with the completed speech
-        # For example, return it, save it, or process it further
+        # Exit the program after processing the speech
+        print("Exiting program...")
+        os._exit(0)
     current_speech = ""
 
 def on_error(error: aai.RealtimeError):
@@ -66,11 +67,4 @@ transcriber.connect()
 microphone_stream = aai.extras.MicrophoneStream(sample_rate=16_000)
 transcriber.stream(microphone_stream)
 
-# The program will continue to transcribe until interrupted (e.g., Ctrl+C)
-try:
-    input("Press Enter to stop transcribing...")
-except KeyboardInterrupt:
-    pass
-
-# Close the connection
-transcriber.close()
+# The program will now exit automatically after processing speech
